@@ -7,6 +7,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [data, setData] = useState("");
   const navigate = useNavigate();
+  const movieId = store.randMovie.id;
 
   const handleMultiSearch = async () => {
     try {
@@ -33,11 +34,6 @@ export const Navbar = () => {
     } catch (error) {
       console.log("Error en el logout", error);
     }
-  };
-
-  const handleRandomMovieClick = () => {
-    let id = store.randMovie.id;
-    navigate(`/moviedetails/${id}`);
   };
 
   return (
@@ -75,7 +71,8 @@ export const Navbar = () => {
                 Buscar
               </button>
             </form>
-            <Link className="nav-link" onClick={handleRandomMovieClick}>
+
+            <Link className="nav-link" to={`/moviedetails/${movieId}`}>
               Ver En Aleatorio
             </Link>
             <Link className="nav-link" to="/genres">

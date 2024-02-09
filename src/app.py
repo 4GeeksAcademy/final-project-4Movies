@@ -64,7 +64,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # Setup the Flask-JWT-Extended extension
-ACCESS_EXPIRES = timedelta(hours=1)
+
+ACCESS_EXPIRES = timedelta(hours=6)
 app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")  # Change this!
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
 jwt = JWTManager(app)
@@ -614,14 +615,13 @@ def get_movies():
 
 
 # Busqueda por genero
-@app.route("/movies/genre/<int:genre_id>", methods=["GET"])
-def get_movies_genre(genre_id):
+@app.route("/movies/genre/<int:genre_id>/<int:page>", methods=["GET"])
+def get_movies_genre(genre_id,page):
     # Retrieve TMDb API key and base URL from environment variables
     api_key = os.getenv("API_KEY")
     base_url = os.getenv("APIMOVIES_URL")
-    page = request.args.get(
-        "page"
-    )  # Obtiene el número de página de los parámetros de consulta
+    page = page  # Obtiene el número de página de los parámetros de consulta
+    print(page)
 
     # Specify the TMDb API endpoint to discover movies by genre
     tmdb_api_url = f"{base_url}/discover/movie?api_key=" + api_key

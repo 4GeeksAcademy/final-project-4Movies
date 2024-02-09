@@ -546,26 +546,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      // Filtered Movies
-      getFilteredMovies: async (page) => {
-        try {
-          const selectedGenre = getStore(selectedGenre); // Access selectedGenre from the store
-          await getActions().getMoviesByGenre(selectedGenre, page); // Wait for getMoviesByGenre to complete
-
-          const filteredMovies = getStore().filteredMovies; // Access filteredMovies from the store
-
-          // Check if filteredMovies is defined or truthy
-          if (filteredMovies) {
-            return true;
-          } else {
-            throw new Error("Filtered movies not found in store");
-          }
-        } catch (error) {
-          console.log("Error getting filtered movies: ", error.message);
-          return false; // Return false to indicate failure
-        }
-      },
-
       // Trailers
       getTrailer: async (id) => {
         try {
@@ -763,17 +743,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      getMoviesByGenre: async (genreId, page = 1) => {
+
+      getMoviesByGenre: async (genreId, page=1) => {
+
         try {
           setStore({ selectedGenre: genreId });
           // Fetch data from the backend route "/movies/genre/<genre_id>"
           const response = await fetch(
-            process.env.BACKEND_URL + `/movies/genre/${genreId}`,
+
+            process.env.BACKEND_URL + `/movies/genre/${genreId}/${page}`,
             {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
-                page: page + 1,
               },
             }
           );

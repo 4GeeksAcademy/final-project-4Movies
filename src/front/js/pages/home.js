@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 import { Movies } from "../component/Movies";
 import { Genres } from "../component/Genres";
@@ -10,13 +11,17 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
+  const movieId = store.randMovie.id;
+
   const [tiempoInicial, setTiempoInicial] = useState({
     horas: 5,
     minutos: 30,
     segundos: 0,
   });
   const [tiempo, setTiempo] = useState(tiempoInicial);
-
+  useEffect(() => {
+    actions.getRandomMovie();
+  }, []);
   useEffect(() => {
     const totalSegundosInicial =
       tiempoInicial.horas * 3600 +
@@ -113,7 +118,7 @@ export const Home = () => {
             />
             <div className="card-body"></div>
           </div>
-
+          {/* 
           <p
             style={{
               fontFamily: "Poppins, Work Sans",
@@ -127,8 +132,7 @@ export const Home = () => {
             }}
           >
             Mirala ahora y obtén 5 puntos!
-          </p>
-
+         
           {/* Botón Ver ahora */}
           <button
             className="boton btn btn-lg btn-custom border-0 mt-3"
@@ -152,71 +156,85 @@ export const Home = () => {
               Ver ahora
             </span>
           </button>
+        </div>*/}
         </div>
-      </div>
-      <div
-        className="container-fluid"
-        style={{ fontFamily: "Poppins, Work Sans", paddingTop: "20px" }}
-      >
-        <h1 className="text-light" style={{ marginLeft: "10%" }}>
-          ¿No Sabes{" "}
-        </h1>
-        <h1 className="text-light d-flex" style={{ marginLeft: "10%" }}>
-          Que Ver?
-        </h1>
-        <h5
-          className="text-light"
-          style={{ fontSize: "15px", marginLeft: "10%", marginBottom: "50px" }}
-        >
-          Deja que nosotros elijamos por ti.
-        </h5>
-
-        {/* Botón2 Ver ahora */}
-        <button
-          className="boton2 btn btn-lg btn-custom border-0 mt-3"
-          onClick={() =>
-            navigate(<CardPeliculas movie={store.randMovie} />)
-          }
+        <div
+          className="container"
           style={{
-            marginBottom: "50px",
-            marginLeft: "10%",
-            display: "flex",
-            alignItems: "center",
-            padding: "15px 20px",
-            backgroundColor: "#A259FF",
+            fontFamily: "Poppins, Work Sans",
+            paddingTop: "20px",
+            alignItems: "left",
           }}
         >
-          <span style={{ fontSize: "12px", color: "white" }}>
-            <i className="fa-solid fa-rocket"></i>
-          </span>
-          <span
-            className="text-center text-light"
-            style={{ fontSize: "14px", marginLeft: "5px" }}
+          <h1
+            className="text-light"
+            style={{ marginLeft: "10%", marginRight: "350px" }}
           >
-            Ver ahora
-          </span>
-          <div
+            ¿No Sabes Que Ver?
+          </h1>
+          <h5
+            className="text-light"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              marginLeft: "5px",
+              fontSize: "15px",
+              marginLeft: "10%",
+              marginBottom: "50px",
+              marginRight: "350px",
             }}
           >
-            <span
-              className="text-center text-light"
-              style={{ fontSize: "14px" }}
+            Deja que nosotros elijamos por ti.
+          </h5>
+
+          {/* Botón2 Ver ahora */}
+          <div
+            style={{
+              width: "25%",
+              margin: "0 auto",
+              alignItems: "left",
+              textAlign: "left", // Aligns the content to the left
+            }}
+          >
+            <Link
+              className="boton2 btn btn-lg btn-custom border-0 mt-3 me-auto"
+              to={`/moviedetails/${movieId}`}
+              //{<CardPeliculas movie={store.randMovie} />}
+              style={{
+                marginBottom: "50px",
+                display: "center",
+                alignItems: "left",
+                padding: "15px 20px",
+                backgroundColor: "#A259FF",
+              }}
             >
-              Ver En
-            </span>
-            <span
-              className="text-center text-light"
-              style={{ fontSize: "14px" }}
-            >
-              Aleatorio
-            </span>
+              <span style={{ fontSize: "12px", color: "white" }}>
+                <i className="fa-solid fa-rocket"></i>
+              </span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginLeft: "5px",
+                }}
+              >
+                <span
+                  className="text-center text-light"
+                  style={{ fontSize: "14px" }}
+                >
+                  Ver En
+                </span>
+                <span
+                  className="text-center text-light"
+                  style={{ fontSize: "14px" }}
+                >
+                  Aleatorio
+                </span>
+              </div>
+            </Link>
           </div>
-        </button>
-        <div className="d-flex text-light" style={{ marginLeft: "10%" }}>
+        </div>
+        <div
+          className="d-flex text-light"
+          style={{ marginLeft: "10%", marginBottom: "5%" }}
+        >
           <h3 style={{ fontSize: "20px", marginRight: "50px" }}>
             240k+<p>Visitas</p>
           </h3>
@@ -229,7 +247,7 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="mas-visto">
+      <div className="mas-visto" style={{ marginLeft: "8%" }}>
         <h3 className="text-light">Explora lo más visto</h3>
         <h5
           className="text-light"
@@ -237,13 +255,13 @@ export const Home = () => {
         >
           Mantente Actualizado
         </h5>
-
-        {/* Cards Películas */}
-        <Movies />
-
-        {/* Generos */}
-        <Genres />
+        
       </div>
+      {/* Cards Películas */}
+      <Movies />
+
+      {/* Generos */}
+      <Genres />
     </div>
   );
 };

@@ -6,15 +6,18 @@ import { CardPeliculas } from "./CardPeliculas";
 
 export const FilteredMovies = () => {
   const { store, actions } = useContext(Context);
-  const [currentPage, setCurrentPage] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const genreId = store.selectedGenre;
 
   useEffect(() => {
-    // Fetch filtered movies when the currentPage or filteredMovies change
-    actions.getFilteredMovies(currentPage);
-  }, [currentPage, store.filteredMovies]); 
+    //actions.getMoviesByGenre(genreId, currentPage);
+  }, []);
 
   const handlePageClick = (data) => {
-    setCurrentPage(data.selected);
+    setCurrentPage(data.selected + 1);
+    actions.getMoviesByGenre(genreId, data.selected + 1);
+    console.log(data.selected + 1);
   };
 
   // Function to chunk array into smaller arrays
@@ -47,7 +50,7 @@ export const FilteredMovies = () => {
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
         activeClassName={"active"}
-        forcePage={currentPage}
+        //forcePage={currentPage}
       />
     </div>
   );
