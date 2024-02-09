@@ -1,0 +1,46 @@
+/* Estilos del contenedor principal de la paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Estilos para cada elemento de la paginación */
+  .pagination li {
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Estilos para los enlaces dentro de los elementos */
+  .pagination li a {
+    display: block;
+    padding: 8px 12px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Estilos para el elemento activo */
+  .pagination li.active a {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Estilos para los elementos al pasar el mouse */
+  .pagination li a:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  /* Estilos para los elementos "Anterior" y "Siguiente" */
+  .pagination li.previous a,
+  .pagination li.next a {
+    font-weight: bold;
+  }
+  
+  /* Estilos para el elemento "Puntos suspensivos" */
+  .pagination li.break a {
+    cursor: default;
+  }
