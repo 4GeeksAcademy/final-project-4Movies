@@ -71,6 +71,7 @@ export const Navbar = () => {
                 Buscar
               </button>
             </form>
+
             <Link className="nav-link" to={`/moviedetails/${movieId}`}>
               Ver En Aleatorio
             </Link>

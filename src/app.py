@@ -64,6 +64,7 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # Setup the Flask-JWT-Extended extension
+
 ACCESS_EXPIRES = timedelta(hours=6)
 app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")  # Change this!
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES

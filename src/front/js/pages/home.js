@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 import { Movies } from "../component/Movies";
@@ -9,6 +10,7 @@ import { CardPeliculas } from "../component/CardPeliculas";
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+
   const movieId = store.randMovie.id;
 
   const [tiempoInicial, setTiempoInicial] = useState({
@@ -130,9 +132,8 @@ export const Home = () => {
             }}
           >
             Mirala ahora y obtén 5 puntos!
-          </p>
-
-          Botón Ver ahora
+         
+          {/* Botón Ver ahora */}
           <button
             className="boton btn btn-lg btn-custom border-0 mt-3"
             style={{

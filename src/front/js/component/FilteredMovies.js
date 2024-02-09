@@ -6,6 +6,7 @@ import { CardPeliculas } from "./CardPeliculas";
 
 export const FilteredMovies = () => {
   const { store, actions } = useContext(Context);
+
   const [currentPage, setCurrentPage] = useState(1);
   const genreId = store.selectedGenre;
 

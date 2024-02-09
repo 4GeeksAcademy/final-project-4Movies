@@ -743,11 +743,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+
       getMoviesByGenre: async (genreId, page=1) => {
+
         try {
           setStore({ selectedGenre: genreId });
           // Fetch data from the backend route "/movies/genre/<genre_id>"
           const response = await fetch(
+
             process.env.BACKEND_URL + `/movies/genre/${genreId}/${page}`,
             {
               method: "GET",
