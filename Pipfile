@@ -17,6 +17,9 @@ flask-cors = "*"
 gunicorn = "*"
 cloudinary = "*"
 flask-admin = "*"
+requests = "*"
+flask-jwt-extended = "*"
+flask-bcrypt = "*"
 typing-extensions = "*"
 
 [requires]
